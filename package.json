@@ -20,12 +20,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ieax/renewhelper.git"
+    "url": "git+https://github.com/ddns6/renewhelper.git"
   },
   "bugs": {
-    "url": "https://github.com/ieax/renewhelper/issues"
+    "url": "https://github.com/ddns6/renewhelper/issues"
   },
-  "homepage": "https://github.com/ieax/renewhelper#readme",
+  "homepage": "https://github.com/ddns6/renewhelper#readme",
   "devDependencies": {
     "@element-plus/icons-vue": "^2.3.2",
     "@tailwindcss/postcss": "^4.1.18",
