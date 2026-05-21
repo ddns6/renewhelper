@@ -1,9 +1,6 @@
 # 🕒 RenewHelper - 时序·守望 (Service Lifecycle Manager)
 
 ![Docker Pulls](https://img.shields.io/docker/pulls/ieax/renewhelper?logo=docker)
-![Cloudflare Workers](https://img.shields.io/badge/Cloudflare-Workers-orange?logo=cloudflare)
-![Vue.js](https://img.shields.io/badge/Frontend-Vue3%20%2B%20ElementPlus-42b883?logo=vue.js)
-![License](https://img.shields.io/badge/License-MIT-blue)
 
 **RenewHelper - 时序·守望** 是一款基于 **Cloudflare Workers** **
 
@@ -60,8 +57,7 @@
 
 **Variables** --- **Environment Variables** --- **Add variable**
 **Variable name**: `AUTH_PASSWORD`=`admin`
-
-3.  点击 **Save and deploy**。
+**Save and deploy**。
 
 #### 第六步：设置定时任务 (Cron)
 
@@ -171,15 +167,7 @@
 - **自动化策略**：
   - **自动续期**：到期后自动将下次到期日顺延一个周期。
   - **自动禁用**：到期超过指定天数未处理，自动标记为禁用。
-- **续费链接**：
-  - 可选，填写后在手动续期页面中会出现“去续期”按钮，帮助用户快速跳转至目标网站进行续期操作。  
 
-### 批量操作
-在项目列表视图，您可以勾选列表左侧的复选框，进行多项服务的**批量删除**、**批量暂停/启用**检查，以及最为实用的**批量分配通知渠道**功能（快速为一组服务绑定相同的推送通道）。
-
-### 查看日志
-
-点击主界面的 **运行日志 (LOGS)** 按钮，可查看所有自动化任务的历史记录、推送结果以及操作审计。
 
 ### ICS 日历订阅 & 日历视图
 
@@ -194,15 +182,6 @@
 6.  **注意**: 链接包含安全 Token，请勿泄露。如泄露可点击“重置令牌”。
 
 ### 💰 资金流向 (Billing Stats)
-
-点击主界面底部的切换按钮，进入 **资金流向看板**：
-
-1.  **月度趋势**：查看过去 12 个月的消费曲线。
-2.  **年度汇总**：查看近 3 年的年度总支出。
-3.  **账单 vs 实付**：
-    - **账单金额 (Bill Amount)**：基于服务设置的“固定价格”统计的应付金额。
-    - **实付金额 (Actual Cost)**：基于续费历史记录中实际填写的金额统计。
-4.  **多币种**：系统会自动查询实时汇率，将不同币种统一转换为您设置的“默认币种”进行汇总展示。
 
 ### 📜 历史账单 (History Records)
 
@@ -223,21 +202,6 @@
 
 ---
 
-## 🤝 贡献与支持
-
-如果您发现了 Bug 或有新功能建议，欢迎提交 Issue 或 Pull Request。
-
-### 💖 捐赠 (Donation)
-
-如果您觉得 RenewHelper 对您有帮助，欢迎请作者喝一杯咖啡 ☕️。您的支持是我持续更新的动力！
-
-**加密货币** - 国际用户
-
-| 币种 | 网络 (Network) | 地址 (Click to Copy) |
-| :--- | :--- | :--- |
-| **USDT** | **BSC (BEP20)** / Polygon / ETH | `0x0de4d19673cbdf954cfb83c0a48abb5ce8f6bf58` |
-
-> ⚠️ 注意：此地址仅支持 EVM 兼容链 (以太坊/币安链/Polygon等)，请不要充值 TRC20 (波场) 资产！！！
 
 **爱发电** - 国内用户
 
