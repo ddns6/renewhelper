@@ -7,7 +7,7 @@
 ![Vue.js](https://img.shields.io/badge/Frontend-Vue3%20%2B%20ElementPlus-42b883?logo=vue.js)
 ![License](https://img.shields.io/badge/License-MIT-blue)
 
-**RenewHelper - 时序·守望** 是一款基于 **Cloudflare Workers** 的全栈服务生命周期提醒、管理工具。它专为管理周期性订阅、域名续费、服务器到期等场景设计。无需服务器，零成本托管，提供精美的机甲风（Mecha-style）UI 界面、强大的农历/公历计算核心、多渠道通知推送能力以及 iCal 日程同步。**同时支持Worker方式和Docker方式部署。v2.x新增资金流向看板，拥有完善的账单管理功能。v3.x前后端完全分离重构，不依赖任何CDN引入即可独立运行。**
+**RenewHelper - 时序·守望** 是一款基于 **Cloudflare Workers** **
 
 <div align="center">
   <img src="./assets/mainUI_darkCN_shotv3.png" alt="RenewHelper 界面预览" width="800">
@@ -18,26 +18,6 @@
 ## ✨ 核心特性
 
 - **⚡️ Serverless 架构**：完全运行在 Cloudflare Workers 上，利用 KV 存储数据，无需购买 VPS，免费额度通常足够个人使用。并同时支持单机Docker方式部署，不依赖任何CDN引入即可独立运行。
-- **📅 智能周期管理**：
-  - 支持**公历**与**农历**（Lunar）周期计算。内置高精度农历算法（1900-2100），支持公历循环（如月付/年付）和农历循环（如生日、传统节日）。
-  - 支持按天、月、年为周期的自动推算。
-  - 提供“循环订阅”、“到期重置”及“固定重复”三种模式。
-- **🔔 多渠道通知**：
-  - 内置支持 **Telegram, Bark, PushPlus, Server酱3, 钉钉 (DingTalk), 飞书 (Lark), 企微 (WeCom), NotifyX, Resend (Email), Gotify, Ntfy, Webhook**。
-  - 允许添加**无限个**推送渠道，支持为每个项目配置不同的推送渠道。支持**批量管理**与**快速分配**。
-  - 支持自定义推送标题、提前提醒天数和每日推送时间。
-- **💰 资金流向看板** (New v2.0+)：
-  - 提供精美的账单统计视图，支持按月、按年查看消费趋势。
-  - 支持**多币种**混合统计（自动汇率转换）。
-  - 支持区分**账单金额**（预算）与**实际支出**（实付）。
-  - 提供未来 n 天待付账单预览。
-- **🤖 自动化管理**：
-  - **自动续期**：到期自动更新下次提醒时间。
-  - **自动禁用**：过期太久未处理的服务自动标记为禁用。
-  - **Cron 触发**：支持通过 Cloudflare Cron Triggers 每日定时检查。
-- **📆 直观日历 & ICS 订阅**：
-  - 提供内置的**日历可视化面板**，可直观查看当月各种续费事件及未来的预测待办。
-  - 提供标准的 `.ics` 订阅链接，可完美接入 iOS 日历、Google Calendar 或 Outlook，支持基于时区的精确提醒并同步到您的手机日程中。
 - **🛡️ 安全可靠**：
   - JWT 身份验证，支持高强度密钥自动生成。
   - 混合限流策略（内存 + KV），防止暴力破解。
@@ -47,9 +27,6 @@
   - Vue 3 + Element Plus 构建的单文件前端。
   - 支持深色/浅色模式切换，并内置平滑的视图切换过渡动画。
   - 支持便捷的列表多选与批量操作（批量删除、启停、分配通知渠道）。
-  - 响应式设计，完美适配移动端和桌面端。
-  - 中英双语界面。
-  - 支持数据导入/导出备份。
 
 ---
 
@@ -59,12 +36,7 @@
 
 [![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/ieax/renewhelper)
 
-1.  点击上方按钮。
-2.  授权 Cloudflare 访问您的 GitHub 账户（用于 Fork 仓库）。
-3.  按照指引完成部署，Cloudflare 会自动为您创建 Worker 和 KV 命名空间。
-4.  **重要**：部署完成后，请进入 Cloudflare Dashboard -\> Workers & Pages -\> 您的项目 -\> **Settings/设置** -\> **Variables/变量**。
-    - 添加环境变量：`AUTH_PASSWORD`，值为您想设置的登录密码（默认为 `admin`）。
-    - 绑定 KV 命名空间：确保变量名为 `RENEW_KV`（不能改！！！）。
+点击-授权 CF 访问您的 Git账户-按指引完成后进入 CF变量-添加`AUTH_PASSWORD`值`admin`
 
 ### 方式二：网页手动部署 (新手推荐)
 
@@ -72,24 +44,14 @@
 
 #### 第一步：创建 KV 存储桶
 
-1.  登录 [Cloudflare Dashboard](https://dash.cloudflare.com/)。
-2.  在左侧菜单点击 **Workers & Pages** -> **KV**。
-3.  点击 **Create a namespace**。
-4.  输入名称：`RENEW_KV`或其他任意名称 (建议大写，方便识别)，点击 **Add**。
+登录 CF **Workers & Pages** -> **KV**
+**Create a namespace** `RENEW_KV`
 
 #### 第二步：创建 Worker 服务
 
-1.  回到 **Workers & Pages** -> **Overview** 页面。
-2.  点击 **Create application** -> **Create Worker**。
-3.  给 Worker 起个名字，例如 `renewhelper`，点击 **Deploy**。
-4.  部署成功后，点击 **Edit code** 进入代码编辑器。
-
-#### 第三步：粘贴代码
-
-1.  在代码编辑器左侧的文件列表中，选中 `worker.js`。
-2.  **全选并删除**里面的所有默认代码。
-3.  将本项目提供的 `_worker.js` 完整代码复制并粘贴进去。
-4.  点击右上角的 **Deploy** 按钮保存代码。
+**Overview** 页面点击 **Create application** -> **Create Worker**。
+3例如 `renewhelper`，点击 **Deploy**。
+部署成功后，点击 **Edit code** 进入代码编辑器粘贴`worker.js`替换所有内容并 **Deploy**
 
 #### 第四步：绑定 KV 数据库 (关键)
 
@@ -152,21 +114,6 @@ RenewHelper 支持通过 Docker 进行一键私有化部署。该方案利用 Mi
 
   * 服务器需安装 Docker 和 Docker Compose。
 
-#### 快速开始
-
-1.  VPS新建一个文件夹（例如 `renewhelper`）。
-2.  在文件夹中创建一个名为 `docker-compose.yml` 的文件，填入以下内容：
-
-```yaml
-services:
-  renew-helper:
-    # 官方镜像地址
-    image: ieax/renewhelper:latest
-    container_name: renew-helper
-    restart: unless-stopped
-    ports:
-      - "9787:9787" # 将容器内部的 9787 端口映射到宿主机的 9787
-    volumes:
       # 数据持久化：将宿主机的 ./data 目录挂载进去，防止重启丢失数据
       - ./data:/data
     environment:
@@ -396,45 +343,6 @@ docker compose up -d
 1.  **手动续费 (Renew)**：适合当期续费。系统会自动根据上一周期的结束时间推算下一次的起止时间填入。
 2.  **补录历史 (Add History)**：适合补录过去的账单。点击“切换为补录模式”，您可以手动添加任意时间段的账单记录。
 3.  **编辑记录**：点击右侧的“历史记录”按钮，可以查看并修正每一笔过往的账单详情（价格、日期、备注）。
-
-### 💾 数据迁移 (Data Migration)
-
-系统支持完整数据的导入导出，方便备份或迁移。
-
-1.  **导出 (Export)**：点击右上角菜单中的“导出数据”，并通过提供的安全链接下载 `.json` 备份文件。
-    *   *包含：所有服务列表、所有续费历史、系统设置。*
-    *   *不包含：敏感的 JWT Secret (导入时会自动保留新系统的 Secret)。*
-2.  **导入 (Import)**：在“系统设置”底部找到“导入数据”区域，粘贴备份文件的内容并提交。
-    *   *注意：导入操作是 **覆盖式** 的，建议导入前先备份当前数据。*
-
-### 🔐 Backup API (高级备份)
-
-RenewHelper 提供了一个专用的 API 端点，允许您通过脚本自动备份数据，无需登录后台。
-
-1.  **设置密钥**：
-    - 进入 **系统设置** -> **数据管理**。
-    - 在 **Backup Key** 中设置一个高强度密钥（至少8位，包含字母和数字）。保存设置（留空则不启用）。
-2.  **调用 API**：
-    - **Endpoint**: `GET /api/backup`
-    - **Header**: `X-Backup-Key: 您的密钥`
-    - **Response**: JSON 格式的完整备份数据。
-
-**示例 (curl)**：
-
-```bash
-curl -H "X-Backup-Key: YourSecretKey123" https://your-worker.dev/api/backup > backup_$(date +%F).json
-```
-
-> ⚠️ 注意：为了安全起见，Backup API 有严格的防暴力破解限制（5分钟内错误5次将封禁IP 15分钟）。请保管好您的密钥。
-
-### 🔄 升级旧数据
-
-如果您是从 v1.x 版本升级到 v3.x，数据结构是兼容的。
-
-1.  在旧版本中执行 **导出**，获取 `.json` 文件。
-2.  部署新版 Worker (覆盖 `_worker.js` 代码)。
-3.  在新版中 **导入** 刚才的备份文件。
-4.  系统会自动识别并兼容旧版数据，缺少的字段（如币种、历史记录）会使用默认值填充，旧版推送渠道会自动迁移。
 
 
 
