@@ -1,7 +1,5 @@
 # 🕒 RenewHelper - 时序·守望 (Service Lifecycle Manager)
 
-[English](./README_EN.md) | **中文**
-
 ![Docker Pulls](https://img.shields.io/docker/pulls/ieax/renewhelper?logo=docker)
 ![Cloudflare Workers](https://img.shields.io/badge/Cloudflare-Workers-orange?logo=cloudflare)
 ![Vue.js](https://img.shields.io/badge/Frontend-Vue3%20%2B%20ElementPlus-42b883?logo=vue.js)
@@ -36,7 +34,7 @@
 
 [![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/ieax/renewhelper)
 
-点击-授权 CF 访问您的 Git账户-按指引完成后进入 CF变量-添加`AUTH_PASSWORD`值`admin`
+点击授权CF访问您的Git账户-按指引完成后进入CF变量-添加`AUTH_PASSWORD`值`admin`
 
 ### 方式二：网页手动部署 (新手推荐)
 
@@ -49,37 +47,28 @@
 
 #### 第二步：创建 Worker 服务
 
-**Overview** 页面点击 **Create application** -> **Create Worker**。
-3例如 `renewhelper`，点击 **Deploy**。
-部署成功后，点击 **Edit code** 进入代码编辑器粘贴`worker.js`替换所有内容并 **Deploy**
+**Overview**---**Create application**---**Create Worker**。
+**Deploy**成功后点击**Edit code**进入代码编辑器粘贴`worker.js`替换所有内容并**Deploy**
 
 #### 第四步：绑定 KV 数据库 (关键)
 
-1.  点击左上角的箭头返回到 Worker 的详情页面 (或者点击顶部的 Worker 名称)。
-2.  点击 **Settings** (设置) -> **Variables** (变量)。
-3.  向下滚动找到 **KV Namespace Bindings** (KV 命名空间绑定)。
-4.  点击 **Add binding**：
-    - **Variable name (变量名)**: 必须填写 `RENEW_KV` (不能改！！！)。
-    - **KV Namespace (命名空间)**: 下拉选择你在第一步创建的那个存储桶。
-5.  点击 **Save and deploy**。
+**Settings** -> **Variables** --- **KV Namespace Bindings** --- **Add binding**：
+**Variable name**: 必须填 `RENEW_KV`
+**KV Namespace**: 下拉选择存储桶后**Save and deploy**。
 
 #### 第五步：设置登录密码
 
-1.  还在 **Variables** 页面，向上滚动找到 **Environment Variables** (环境变量)。
-2.  点击 **Add variable**：
-    - **Variable name**: `AUTH_PASSWORD`
-    - **Value**: 输入你想设置的后台登录密码 (如果不设置，默认为 `admin`)。
+**Variables** --- **Environment Variables** --- **Add variable**
+**Variable name**: `AUTH_PASSWORD`=`admin`
+
 3.  点击 **Save and deploy**。
 
 #### 第六步：设置定时任务 (Cron)
 
 为了让自动续期功能生效，**须要设置定时触发器。**
 
-1.  点击页面顶部的 **Triggers** (触发器) 标签。
-2.  向下滚动找到 **Cron Triggers**。
-3.  点击 **Add Cron Trigger**。
-4.  **Cron schedule**: 准确输入 `0,30 * * * *` (代表 UTC 时间每天每个半点检查一次，不能改！！！)。
-5.  点击 **Add Trigger**。
+触发器**Triggers** --- **Cron Triggers**
+**Add Cron Trigger** --- **Cron schedule**: 准确输入 `0,30 * * * *` --- **Add Trigger**
 
 ### 方式三：GitHub Actions 部署 (进阶推荐)
 
